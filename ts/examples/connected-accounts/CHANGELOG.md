@@ -1,5 +1,13 @@
 # connected-accounts-example
 
+## 0.1.22
+
+### Patch Changes
+
+- Updated dependencies [b53b07a]
+- Updated dependencies [c7ee771]
+  - @composio/core@0.29.0
+
 ## 0.1.21
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # anthropic-example
 
+## 0.1.13
+
+### Patch Changes
+
+- Updated dependencies [b53b07a]
+- Updated dependencies [c7ee771]
+  - @composio/core@0.29.0
+  - @composio/anthropic@0.11.7
+  - @composio/claude-agent-sdk@0.13.0
+
 ## 0.1.12
 
 ### Patch Changes
