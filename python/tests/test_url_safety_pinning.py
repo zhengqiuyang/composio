@@ -96,11 +96,20 @@ def no_inherited_proxy(monkeypatch: pytest.MonkeyPatch) -> None:
     ``getproxies`` also reads) would disable the pinning adapter, and the
     request would dial the proxy's answer to the hostname instead of the
     validated address — failing these tests on machines that carry one.
+
+    The patch has to land on ``requests.sessions``: the session imports
+    ``get_environ_proxies`` by name at module import, so patching
+    ``requests.utils.get_environ_proxies`` (as a previous attempt did) is a
+    no-op for the request path, and a Windows machine with a registry proxy
+    still dialed it — every request came back ``502`` from the local proxy
+    with an empty body. ``requests.utils.getproxies`` is patched too because
+    ``get_environ_proxies`` resolves it through ``requests.utils`` globals.
     """
     monkeypatch.setattr(
-        "requests.utils.get_environ_proxies",
-        lambda url: {},
+        "requests.sessions.get_environ_proxies",
+        lambda url, no_proxy=None: {},
     )
+    monkeypatch.setattr("requests.utils.getproxies", lambda: {})
 
 
 @pytest.fixture
